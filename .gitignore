@@ -1,0 +1,12 @@
+# Ignore raw data
+data/raw/
+
+# Python
+__pycache__/
+*.pyc
+
+# VS Code settings
+.vscode/
+
+# Jupyter
+.ipynb_checkpoints/
