@@ -38,7 +38,7 @@ COLLEGE_FILE = (
 # ------------------
 
 POLLING_FILE = (
-    r"data/raw/polling_places.csv"
+    r"data\raw\polling_place_20260303.csv"
 )
 
 # ------------------
