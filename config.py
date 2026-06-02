@@ -75,7 +75,7 @@ ACS_VARIABLES = {
 
     "population":
         "B01003_001E",
-
+    
     "median_income":
         "B19013_001E",
 
@@ -91,4 +91,19 @@ ACS_VARIABLES = {
     "hispanic_population":
         "B03003_003E"
 
+}
+
+AGE_VARIABLES = {
+
+    # Male
+    "m18_19": "B01001_007E",
+    "m20": "B01001_008E",
+    "m21": "B01001_009E",
+    "m22_24": "B01001_010E",
+
+    # Female
+    "f18_19": "B01001_031E",
+    "f20": "B01001_032E",
+    "f21": "B01001_033E",
+    "f22_24": "B01001_034E",
 }

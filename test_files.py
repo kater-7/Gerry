@@ -24,6 +24,11 @@ colleges = pd.read_csv(
 print("\nCollege Columns:")
 print(colleges.columns.tolist())
 
+print(
+    colleges[["county", "enroll"]]
+    .head(20)
+)
+
 ### POLLLING PLACES HAS FILE ISSUES 
 '''
 print("\nLoading polling places...")

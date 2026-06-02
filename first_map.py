@@ -26,6 +26,11 @@ gdf.plot(
     ax=ax
 )
 
+print(
+    gdf[["NAME_x"]]
+    .head()
+)
+
 # Format colorbar as percentages
 cbar = ax.get_figure().axes[-1]
 cbar.yaxis.set_major_formatter(
@@ -44,5 +49,6 @@ plt.savefig(
     f"output/maps/{DEMOGRAPHIC}_pop.png",
     dpi=300
 )
+print(gdf.columns.tolist())
 
 plt.show()
