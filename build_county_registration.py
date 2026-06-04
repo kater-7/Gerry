@@ -41,3 +41,11 @@ county_registration.to_csv(
 )
 
 print(county_registration.head())
+
+print(county_registration["registered_youth"].sum())
+
+county_registration.to_csv(
+    "data/processed/county_registration.csv",
+    index=False
+)
+
