@@ -1,6 +1,5 @@
 import geopandas as gpd
 import matplotlib.pyplot as plt
-import matplotlib.pyplot as plt
 import matplotlib.ticker as mtick
 import pandas as pd
 from config import COLLEGE_FILE
