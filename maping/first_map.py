@@ -3,32 +3,29 @@ import matplotlib.pyplot as plt
 import matplotlib.pyplot as plt
 import matplotlib.ticker as mtick
 
-
 DEMOGRAPHIC = "hispanic"
+
 gdf = gpd.read_file(
-    "data/processed/nc_demographics.geojson"
+    "data/processed/nc_age_demographics.geojson"
 )
 
-gdf[f"pct_{DEMOGRAPHIC}"] = (
-    gdf[f"{DEMOGRAPHIC}_population"].astype(float)
+gdf[f"pct_youth_{DEMOGRAPHIC}"] = (
+    gdf[f"{DEMOGRAPHIC}_youth"].astype(float)
     /
-    gdf["population"].astype(float)
+    gdf["youth_18_24"].astype(float)
     * 100
 )
 
 fig, ax = plt.subplots(figsize=(10, 8))
 
 gdf.plot(
-    column=f"pct_{DEMOGRAPHIC}",
+    column=f"pct_youth_{DEMOGRAPHIC}",
     cmap="viridis",
     legend=True,
     legend_kwds={"shrink": 0.4},
+    vmin=0,
+    vmax=100,
     ax=ax
-)
-
-print(
-    gdf[["NAME_x"]]
-    .head()
 )
 
 # Format colorbar as percentages
@@ -38,7 +35,7 @@ cbar.yaxis.set_major_formatter(
 )
 
 ax.set_title(
-    f"Percent {DEMOGRAPHIC.replace('_', ' ').title()} Population by County"
+    f"Percent {DEMOGRAPHIC.replace('_', ' ').title()} Population age 18-24 by County"
 )
 
 ax.axis("off")
@@ -46,7 +43,7 @@ ax.axis("off")
 plt.tight_layout()
 
 plt.savefig(
-    f"output/maps/{DEMOGRAPHIC}_pop.png",
+    f"output/maps/{DEMOGRAPHIC}_youth_pop.png",
     dpi=300
 )
 print(gdf.columns.tolist())
