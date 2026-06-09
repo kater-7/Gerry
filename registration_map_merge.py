@@ -12,11 +12,32 @@ age_data = gpd.read_file(
     f"data/processed/nc_age.geojson"
 )
 
+age_data["county"] = (
+    age_data["NAME_x"]
+    .str.upper()
+)
+
+youth_reg["county"] = (
+    youth_reg["county"]
+    .str.upper()
+)
+
 registration_map = age_data.merge(
     youth_reg,
-    left_on="NAME_x",
-    right_on="county"
+    on="county"
 )
+
+registration_map["registered_youth"] = pd.to_numeric(
+    registration_map["registered_youth"],
+    errors="coerce"
+)
+
+registration_map["youth_18_24"] = pd.to_numeric(
+    registration_map["youth_18_24"],
+    errors="coerce"
+)
+
+print(len(registration_map))
 
 print(age_data["NAME_x"].head())
 print(youth_reg["county"].head())
@@ -28,7 +49,22 @@ registration_map["registration_rate"] = (
     / registration_map["youth_18_24"]
 ) * 100
 
+print(registration_map.head(10))
+
+print(
+    registration_map[
+        ["county", "registered_youth", "youth_18_24", "registration_rate"]
+    ]
+    .sort_values("registration_rate", ascending=False)
+    .head(20)
+)
+
+print("Youth Population:", registration_map["youth_18_24"].sum())
+print("Registered Youth:", registration_map["registered_youth"].sum())
+
+
 ## PLOT!
+'''
 fig,ax = plt.subplots(figsize = (10,8))
 
 registration_map.plot(
@@ -58,6 +94,4 @@ plt.savefig(
 )
 
 plt.show()
-
-
-
+'''
