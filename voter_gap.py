@@ -30,9 +30,9 @@ alamance = (
     .assign(youth_prop=lambda df: df["under_25"] / df["total_reg"])
 )
 
-ala_shape = gpd.read_file(
+aa_shape = gpd.read_file(
     f"https://s3.amazonaws.com/dl.ncsbe.gov/ShapeFiles/Precinct/SBE_PRECINCTS_CENSUSBLOCKS_20251212.zip"
-)
+)l
 ala_shape = ala_shape[ala_shape["county_nam"] == "ALAMANCE"]
 
 alamance_shape = ala_shape.merge(
