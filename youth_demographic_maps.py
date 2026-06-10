@@ -11,15 +11,33 @@ counties = gpd.read_file(
     "data/processed/nc_counties.geojson"
 )
 
-for col in age.columns:
-    print(col)
-
 counties["GEOID"] = counties["GEOID"].astype(str)
 age["GEOID"] = age["GEOID"].astype(str)
 
-merged = counties.merge(
+voting_reg = pd.read_csv(
+    "data/processed/county_registration.csv"
+)
+
+for col in voting_reg.columns:
+    print(col)
+
+print(voting_reg["county"].unique)
+
+'''
+counties_age = counties.merge(
     age,
     on="GEOID",
+    how="left"
+)
+
+counties_age["county"] = (
+    counties_age[""]
+    .str.upper()
+)
+
+merged = counties_age.merge(
+    voting_reg,
+    on="county",
     how="left"
 )
 
@@ -28,7 +46,6 @@ merged.to_file(
     driver="GeoJSON"
 )
 
-'''
 for col in counties.columns:
     print(col)
 

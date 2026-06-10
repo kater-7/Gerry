@@ -25,6 +25,10 @@ TRACT_SHAPEFILE = (
     r"data/raw/shapefiles/tracts/tl_2025_37_tract.shp"
 )
 
+PRECINCT_SHAPEFILE = (
+    r"data/raw/shapefiles/precincts/SBE_PRECINCTS_CENSUSBLOCKS_20251212.shp"
+)
+
 # ------------------
 # Colleges
 # ------------------
@@ -52,6 +56,24 @@ NC_COUNTIES_FILE = (
 CENSUS_COUNTIES_FILE = (
     r"data/processed/census_counties.csv"
 )
+
+VOTER_REG = (
+    r"data/raw/ncvoter_reg/ncvoter_Statewide.txt"
+)
+
+import pandas as pd
+
+FILE = "data/raw/ncvoter_reg/ncvoter_Statewide.txt"
+
+sample = pd.read_csv(
+    FILE,
+    sep="\t",
+    encoding="latin1",
+    nrows=5
+)
+
+for col in sample.columns:
+    print(col)
 
 # ------------------
 # Outputs

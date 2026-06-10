@@ -1,13 +1,92 @@
-# Ignore raw data
-data/raw/
-data/processed/
-
+# ==========================================
 # Python
-__pycache__/
-*.pyc
+# ==========================================
 
-# VS Code settings
-.vscode/
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
 
 # Jupyter
 .ipynb_checkpoints/
+
+# VS Code
+.vscode/
+
+# ==========================================
+# Operating System Files
+# ==========================================
+
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ==========================================
+# Python Build Files
+# ==========================================
+
+build/
+dist/
+*.egg-info/
+
+# ==========================================
+# Data Files
+# ==========================================
+
+# Raw voter file (too large)
+data/raw/ncvoter_reg/
+
+# Ignore all processed outputs
+data/processed/*.geojson
+data/processed/*.gpkg
+data/processed/*.parquet
+
+# Optional: ignore all CSV outputs
+# Uncomment if generated files become large
+# data/processed/*.csv
+
+# ==========================================
+# Shapefiles
+# ==========================================
+
+*.shp
+*.shx
+*.dbf
+*.prj
+*.cpg
+*.sbn
+*.sbx
+*.xml
+
+# Geodatabases
+*.gdb/
+*.gdb.zip
+
+# ==========================================
+# GIS / Mapping Outputs
+# ==========================================
+
+outputs/
+*.png
+*.jpg
+*.jpeg
+*.pdf
+
+# ==========================================
+# Large Downloads
+# ==========================================
+
+*.zip
+*.7z
+*.rar
+
+# ==========================================
+# Logs
+# ==========================================
+
+*.log
