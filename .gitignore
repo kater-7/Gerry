@@ -40,6 +40,8 @@ dist/
 
 # Raw voter file (too large)
 data/raw/ncvoter_reg/
+echo data/processed/*.csv >> .gitignore
+echo data/processed/*.geojson >> .gitignore
 
 # Ignore all processed outputs
 data/processed/*.geojson
