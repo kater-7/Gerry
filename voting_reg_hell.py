@@ -219,6 +219,8 @@ for i, chunk in enumerate(
 
             last_voted_party=("voted_party_cd", "last"),
 
+            republican_lean=("voted_party_cd", ""),
+
             last_vote_date=("election_lbl", "max")
         )
         .reset_index()
