@@ -5,8 +5,24 @@ import numpy as np
 import matplotlib.pyplot as plt
 import plotly.express as px
 import json
-from tqdm import tqdm
 
+cols_alamance = [
+    "voter_reg_num",
+    "age_at_year_end",
+    "party_cd",
+    "precinct_abbrv",
+    "precinct_desc",
+]
+
+cols_ala_vhistory = [
+    "voter_reg_num",
+    "election_lbl",
+    "election_desc",
+    "voted_party_cd",
+    "voted_party_desc",
+    "pct_label",
+    "pct_description",
+]
 
 # reading in alamance county and joining voter registration/voter history data
 alamance = pd.read_csv("data/processed/alamance.csv", usecols=cols_alamance)
@@ -75,7 +91,7 @@ alamance_merged = (
     )
 )
 
-shape = gpd.read_file(
+ala_shape = gpd.read_file(
     f"https://s3.amazonaws.com/dl.ncsbe.gov/ShapeFiles/Precinct/SBE_PRECINCTS_CENSUSBLOCKS_20251212.zip"
 )
 ala_shape = ala_shape[ala_shape["county_nam"] == "ALAMANCE"]
@@ -90,14 +106,17 @@ alamance_map = alamance_map.to_crs("EPSG:4326")
 
 geojson_ala = json.loads(alamance_map.to_json())
 
-var_of_interest = "prop_youth_dem"
+var_of_interest = "youth_prop_reg"
 
 fig = px.choropleth_map(
     alamance_map,
     geojson=geojson_ala,
     locations="prec_id",
-    color_continuous_scale="RdYlBu",
-    range_color=(0, alamance_map[var_of_interest].max()),
+    color_continuous_scale="RdYlGn",
+    range_color=(
+        alamance_map[var_of_interest].min(),
+        alamance_map[var_of_interest].max(),
+    ),
     color=var_of_interest,
     featureidkey="properties.prec_id",
     center={"lat": 36.0, "lon": -79.4},
@@ -105,3 +124,27 @@ fig = px.choropleth_map(
 )
 
 fig.show()
+
+"""
+voters = pd.read_csv("data/processed/voters.csv")
+voters = voters.filter(regex="(^(voted_age|reg_age|pct_voted_age))|(geoid20)")
+
+county_reg.head()
+
+
+ax = alamance_shape.plot(
+    column="youth_prop",
+    cmap="RdYlBu",
+    legend=True,
+    figsize=(12, 12),
+    legend_kwds={"shrink": 0.7},
+)
+ax.axis("off")
+ax.set_title(f"Youth Voters in Alamance County")
+
+alamance_map = gpd.GeoDataFrame(
+    alamance.merge(ala_shape, left_on="prec_id", right_on="precinct_abbrv", how="left"),
+    geometry="data/processed/SBE_PRECINCTS_CENSUSBLOCKS_20251212",
+)
+
+"""
