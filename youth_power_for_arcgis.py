@@ -4,7 +4,7 @@ import pandas as pd
 import geopandas as gpd
 
 
-youth_power_map = gpd.read_file("data/processed/youth_power_map.gpkg")
+youth_power_map = gpd.read_file("data/processed/precincts_2024_only.gpkg")
 
 # Export shapefile
 out_dir = "youth_power_shapefile"
@@ -15,7 +15,7 @@ shp_path = os.path.join(out_dir, "youth_power_map.shp")
 youth_power_map.to_file(shp_path, driver="ESRI Shapefile")
 
 # Zip all shapefile components
-zip_name = "youth_power_map.zip"
+zip_name = "youth_power_map_2024only.zip"
 
 with zipfile.ZipFile(zip_name, "w") as z:
     for file in os.listdir(out_dir):
